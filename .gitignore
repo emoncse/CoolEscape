@@ -1,0 +1,31 @@
+# PyCharm files
+.idea/
+
+# Virtual environment
+venv/
+
+# Django migrations
+#*/migrations/
+
+# Environment variables file
+.env
+
+# Python packages
+*.pyc
+__pycache__/
+
+# Static files
+static/collect_static
+
+# Media files
+media/
+
+# logger file
+logs/
+debug.log
+
+# scripts
+scriptslogs/request.log
+
+# vs code
+.vscode
