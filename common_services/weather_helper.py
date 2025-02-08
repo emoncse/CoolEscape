@@ -111,3 +111,109 @@ class WeatherService:
     def fetch_weather_data_sync(cls):
         logger.info("Starting synchronous weather fetching...")
         return asyncio.run(cls.retrieve_district_weather_data())
+
+    @staticmethod
+    async def fetch_weather_by_coordinates(session, latitude, longitude, travel_date):
+        """Fetch temperature at 2 PM for a specific location and date."""
+
+        cache_key = f"weather_{latitude}_{longitude}_{travel_date}"
+        cached_data = cache.get(cache_key)
+
+        if cached_data:
+            logger.info("Cache hit for weather data: %s", cache_key)
+            return cached_data
+
+        logger.info("Cache miss. Fetching weather data for lat=%s, lon=%s, date=%s", latitude, longitude, travel_date)
+
+        request_params = {
+            "latitude": latitude,
+            "longitude": longitude,
+            "hourly": "temperature_2m",
+            "timezone": "Asia/Dhaka",
+            "start_date": travel_date,
+            "end_date": travel_date
+        }
+
+        try:
+            async with session.get(get_forecast_url(), params=request_params) as response:
+                if response.status != 200:
+                    logger.error("API Error: %s", response.status)
+                    return {"error": f"API Error {response.status}"}
+
+                weather_data = await response.json()
+
+                if "hourly" not in weather_data or "time" not in weather_data["hourly"] or "temperature_2m" not in \
+                        weather_data["hourly"]:
+                    logger.error("No hourly weather data available.")
+                    return {"error": "No hourly data available"}
+
+                time_entries = weather_data['hourly']['time']
+                temperature_entries = weather_data['hourly']['temperature_2m']
+
+                temperature_index = next(
+                    (i for i, time_value in enumerate(time_entries) if time_pattern.search(time_value)), None)
+
+                if temperature_index is not None:
+                    temperature_at_2pm = temperature_entries[temperature_index]
+                    logger.info("Fetched temperature: %s°C at 2 PM", temperature_at_2pm)
+
+                    result = {"temperature": temperature_at_2pm}
+                    cache.set(cache_key, result, CACHE_EXPIRATION)
+                    return result
+
+                logger.warning("No 2 PM temperature data found.")
+                return {"error": "No 2 PM temperature data found"}
+
+        except Exception as error:
+            logger.exception("Error fetching weather data: %s", str(error))
+            return {"error": str(error)}
+
+    @classmethod
+    async def compare_travel_weather(cls, friend_latitude, friend_longitude, destination_latitude,
+                                     destination_longitude, travel_date):
+        """Compare temperatures between friend's location and destination at 2 PM on the travel date."""
+
+        cache_key = f"compare_weather_{friend_latitude}_{friend_longitude}_{destination_latitude}_{destination_longitude}_{travel_date}"
+        cached_result = cache.get(cache_key)
+
+        if cached_result:
+            logger.info("Cache hit for travel comparison: %s", cache_key)
+            return cached_result  # Return cached comparison result
+
+        logger.info("Cache miss. Comparing weather between friend=(%s, %s) and destination=(%s, %s) for date=%s",
+                    friend_latitude, friend_longitude, destination_latitude, destination_longitude, travel_date)
+
+        async with aiohttp.ClientSession() as session:
+            friend_weather_task = cls.fetch_weather_by_coordinates(session, friend_latitude, friend_longitude,
+                                                                   travel_date)
+            destination_weather_task = cls.fetch_weather_by_coordinates(session, destination_latitude,
+                                                                        destination_longitude, travel_date)
+            friend_weather_data, destination_weather_data = await asyncio.gather(friend_weather_task,
+                                                                                 destination_weather_task)
+
+        friend_temperature = friend_weather_data.get("temperature")
+        destination_temperature = destination_weather_data.get("temperature")
+
+        if friend_temperature is None or destination_temperature is None:
+            logger.warning("Weather data unavailable for decision making.")
+            return {
+                "friend_temperature": friend_temperature,
+                "destination_temperature": destination_temperature,
+                "decision": "Data unavailable, cannot decide",
+                "friend_error": friend_weather_data.get("error"),
+                "destination_error": destination_weather_data.get("error")
+            }
+
+        temperature_difference =  abs(destination_temperature - friend_temperature)
+        travel_decision = "Yes, it's a good day to travel!" if temperature_difference < 4 else "No, the temperature difference is too high!"
+
+        logger.info("Travel decision: %s (Temp Difference: %s°C)", travel_decision, temperature_difference)
+
+        result = {
+            "friend_temperature": friend_temperature,
+            "destination_temperature": destination_temperature,
+            "decision": travel_decision
+        }
+        cache.set(cache_key, result, CACHE_EXPIRATION)  # Store in cache
+
+        return result
