@@ -1,7 +1,5 @@
-[Added] CoolEscape: [CES005]
+[Added] CoolEscape: [CES007]
 
-1. Slightly changes in the views.py file. [coolest district app]
-2. Added Unit test for the views.py file. [coolest district app]
-3. Added Unit test for the views.py file. [travel advice app]
+1. Modified the gitingore file
 
-CES005
+CES007
