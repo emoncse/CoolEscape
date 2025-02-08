@@ -1,5 +1,7 @@
-[Added] CoolEscape: [CES007]
+[Added] CoolEscape: [CES008]
 
-1. Modified the gitingore file
+1. Travel temperature difference has been reduced to 2 degree Celsius.
+2. Dockerfile added.
+3. Docker compose file has been added.
 
-CES007
+CES008

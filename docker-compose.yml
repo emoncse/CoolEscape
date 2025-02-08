@@ -1,0 +1,15 @@
+services:
+  app:
+    container_name: CoolEscape_v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    restart: unless-stopped
+    volumes:
+      - .:/code:rw
+      - ./logs:/var/log/coolescape/logs:rw
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
