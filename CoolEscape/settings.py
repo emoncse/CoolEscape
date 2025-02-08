@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 #Custom Applications
 CUSTOM_APPS = [
+    'coolest_districts',
+    'travel_advice',
 ]
 
 # install library
@@ -42,6 +44,7 @@ INSTALLED_LIBRARIES = [
 ]
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -232,10 +235,6 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        },
         'simple': {
             'format': '{levelname} {message}',
             'style': '{',
@@ -243,27 +242,22 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
+            'formatter': 'simple',
         },
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
-            'formatter': 'verbose',
+            'filename': os.path.join(os.getcwd(), 'logs/debug.log'),
+            'formatter': 'simple',
         },
     },
     'loggers': {
-        'django': {
+        'weather_service': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
-            'propagate': True,
-        },
-        'myapp': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
+            'propagate': False,
         },
     },
 }
