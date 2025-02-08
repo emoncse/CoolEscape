@@ -224,3 +224,4 @@ Replace `<access_token>` with the token obtained in the previous step.
    }
    ```
 
+## N.B. The API are open for public use. You can use the API without any authentication. We can also restrict the API access by using isAuthenticated permission classes.
