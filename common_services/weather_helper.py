@@ -205,7 +205,7 @@ class WeatherService:
             }
 
         temperature_difference =  abs(destination_temperature - friend_temperature)
-        travel_decision = "Yes, it's a good day to travel!" if temperature_difference < 4 else "No, the temperature difference is too high!"
+        travel_decision = "Yes, it's a good day to travel!" if temperature_difference <= 2 else "No, the temperature difference is too high!"
 
         logger.info("Travel decision: %s (Temp Difference: %s°C)", travel_decision, temperature_difference)
 

@@ -7,6 +7,10 @@ venv/
 # Django migrations
 #*/migrations/
 
+# database
+db.sqlite3
+
+
 # Environment variables file
 .env
 
