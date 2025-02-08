@@ -1,10 +1,7 @@
-[Added] CoolEscape: [CES004]
+[Added] CoolEscape: [CES005]
 
-1. Redirect the urls from the main urls.py to the travel advice urls.py
-2. Added Travel Recommendation class in the views.py to handle travel recommendations
-3. Added Extended schema for choosing friend's current district, destination district and date in the swagger documentation
-3. Added Two functions to weather helper class to get the weather for a given two locations and date range and calculate difference of weather between two locations at 2pm on that day.
-4. Added logger to see the logs of the data fetch, calculation and response
-5. Cache added for location based result to reduce the time complexity
+1. Slightly changes in the views.py file. [coolest district app]
+2. Added Unit test for the views.py file. [coolest district app]
+3. Added Unit test for the views.py file. [travel advice app]
 
-CES004
+CES005

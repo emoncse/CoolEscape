@@ -1,6 +1,5 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiTypes
-from rest_framework import permissions
-from rest_framework.viewsets import ViewSet
+from rest_framework import permissions, viewsets
 from rest_framework.response import Response
 from common_services.weather_helper import WeatherService
 import logging
@@ -9,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 @extend_schema(tags=['Coolest Districts'])
-class DistrictWeatherViewSet(ViewSet):
+class DistrictWeatherViewSet(viewsets.ViewSet):
     """API ViewSet for fetching district-wise average temperatures at 2 PM."""
     # permission_classes = [permissions.IsAuthenticated]
 
