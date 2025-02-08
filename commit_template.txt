@@ -1,0 +1,8 @@
+[Added] CoolEscape: [CES002]
+
+1. Install library Djangorestframework, rest_framework_simplejwt, and drf-spectacular, python-decouple, and requests
+2. Added Logger to the project
+3. Added Configurations for Rest Framework, Simple JWT, and Spectacular and Logger
+4. Added Decouple for the environment variables
+
+CES002
