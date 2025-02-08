@@ -178,6 +178,16 @@ docker compose up -d
 
 - **POST** `/api/token/`
 - **POST** `/api/token/refresh/`
+- **GET** `/v1/coolest-districts/`
+  - **Parameters**:
+    - `limit` (integer): The number of coolest districts to be returned.
+    - `sort` (string): The field by which the coolest districts
+
+- **GET** `/v1/travel-destination/`
+  - **Parameters**:
+    - `date` (string): The date for which the travel advice is to be found.
+    - `friend_district` (string): The first location for which the weather is to be compared.
+    - `destination_district` (string): The second location for which the weather is to be compared.
 
 ## Using Postman
 

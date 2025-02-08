@@ -1,7 +1,5 @@
-[Added] CoolEscape: [CES008]
+[Update] CoolEscape: [CES009]
 
-1. Travel temperature difference has been reduced to 2 degree Celsius.
-2. Dockerfile added.
-3. Docker compose file has been added.
+1. Slightly change in response for travel advice API.
 
-CES008
+CES009

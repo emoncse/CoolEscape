@@ -141,6 +141,7 @@ class WeatherService:
                     return {"error": f"API Error {response.status}"}
 
                 weather_data = await response.json()
+                logger.info("Received weather data: %s", weather_data)
 
                 if "hourly" not in weather_data or "time" not in weather_data["hourly"] or "temperature_2m" not in \
                         weather_data["hourly"]:
@@ -205,7 +206,7 @@ class WeatherService:
             }
 
         temperature_difference =  abs(destination_temperature - friend_temperature)
-        travel_decision = "Yes, it's a good day to travel!" if temperature_difference <= 2 else "No, the temperature difference is too high!"
+        travel_decision = "Yes, it's a good day to travel!" if temperature_difference <= 2 else f"No, the temperature difference is {round(temperature_difference, 2)} degree Celsius which is too high!"
 
         logger.info("Travel decision: %s (Temp Difference: %s°C)", travel_decision, temperature_difference)
 
