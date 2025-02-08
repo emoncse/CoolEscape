@@ -36,5 +36,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('v1/', include([
         path('', include('coolest_districts.urls.urls_v1')),
+        path('', include('travel_advice.urls.urls_v1')),
     ])),
 ] + authentication_urlspatterns + swagger_urlpatterns

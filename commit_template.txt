@@ -1,26 +1,10 @@
-[Added] CoolEscape: [CES003]
+[Added] CoolEscape: [CES004]
 
-1. Added bd-districts.json to the project
-2. Added Requirements.txt file using pip freeze > requirements.txt
-3. Added a new file named commit_template.txt
-4. Two Apps are added to the project:
-    - coolest_districts
-        - views and urls versioning folder structure, as we don't need any models and serializers, we are not using the app name in the folder structure
-    - travel_advice
-        - views and urls versioning folder structure, as we don't need any models and serializers, we are not using the app name in the folder structure
-5. Added common services directory
-6. Added utils directory for common utilities
-7. Install aiohttp library, Asynchronous HTTP Client/Server for asyncio and Python.
-8. added common server configurations
-    - district names which will be for only 64 districts names
-    - weather helper will find the coolest districts using aiohttp and asyncio concurrently for all districts to reduce the time complexity
-9. Added a new file named commit_template.txt
-10. Added Coolest District API
-    - GET /api/v1/coolest-districts/
-    - GET /api/v1/coolest-districts/?limit=5
-    - GET /api/v1/coolest-districts/?limit=5&sort=asc
-    - GET /api/v1/coolest-districts/?limit=5&sort=desc
-11. Added cache for the coolest districts API
-12. Added hashlib for the cache key
+1. Redirect the urls from the main urls.py to the travel advice urls.py
+2. Added Travel Recommendation class in the views.py to handle travel recommendations
+3. Added Extended schema for choosing friend's current district, destination district and date in the swagger documentation
+3. Added Two functions to weather helper class to get the weather for a given two locations and date range and calculate difference of weather between two locations at 2pm on that day.
+4. Added logger to see the logs of the data fetch, calculation and response
+5. Cache added for location based result to reduce the time complexity
 
-CES003
+CES004
