@@ -1,8 +1,6 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from ..views.views_v1 import TravelRecommendationViewSet
-
+from django.urls import path
+from travel_advice.views.views_v1 import TravelRecommendationViewSet
 
 urlpatterns = [
-    path('travel-destination/', TravelRecommendationViewSet.as_view({'get': 'travel_recommendation'}), ),
+    path('travel-recommendation/', TravelRecommendationViewSet.as_view({'get': 'travel_recommendation'})),
 ]
