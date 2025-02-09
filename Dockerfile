@@ -16,4 +16,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code
 COPY . /code
 
+RUN python manage.py collectstatic --noinput
+
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "CoolEscape.wsgi:application"]
