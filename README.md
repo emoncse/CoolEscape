@@ -1,227 +1,225 @@
+# 🚀 CoolEscape  
 
-# CoolEscape
+CoolEscape is a Django-based web application designed to help users:  
 
-CoolEscape is a Django-based web application that helps users:  
+🌟 **Find the Coolest Districts** – Identify the lowest-temperature districts in Bangladesh.  
+🌟 **Compare Weather for Travel** – Check and compare weather conditions between two locations for a specific date.  
+🌟 **Secure Access** – Uses JWT authentication for enhanced security.  
+🌟 **API Documentation** – Built with Django Rest Framework (DRF) and drf-spectacular for easy API documentation.  
 
-1. **Find the Coolest Districts** – Identify the districts in Bangladesh with the lowest temperatures.  
-2. **Compare Weather for Travel** – Check the weather of two locations on a specific date and determine if travel is suitable.  
-3. **Secure Access** – Uses JWT authentication for secure user access.  
-4. **API Documentation** – Built with Django Rest Framework (DRF) and drf-spectacular for API schema generation and documentation.  
+---
 
-## Table of Contents
+## 📌 Table of Contents  
+- [Installation](#installation)  
+- [Docker Setup](#docker-setup)  
+- [API Endpoints](#api-endpoints)  
+- [Swagger API Documentation](#swagger-api-documentation)  
+- [Using Postman](#using-postman)  
 
-- Installation
-- Setup
-- API Endpoints
-- Swagger API Documentation
-- Using Postman
+---
 
-## Installation
+## 🛠 Installation  
 
-### Prerequisites
+### **Prerequisites**  
+Ensure you have the following installed:  
+- Python `3.12.8`  
+- Django `5.1.6`  
+- Virtualenv  
 
-- Python 3.12.8
-- Django 5.1.6
-- Virtualenv
+### **Steps**  
 
-### Steps
-
-1. Clone the repository:
-
-```
+1️⃣ **Clone the repository:**  
+```sh
 git clone https://github.com/emoncse/CoolEscape.git
 cd CoolEscape
 ```
 
-2. Create and activate a virtual environment:
-
-```
+2️⃣ **Create and activate a virtual environment:**  
+```sh
 python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```
 
-3. Install the dependencies:
-
-```
+3️⃣ **Install dependencies:**  
+```sh
 pip install -r requirements.txt
 ```
 
-4. Apply the migrations:
-
+** Special Note: **
 ```
+aiohttp 
+````
+4️⃣ **Apply database migrations:**  
+```sh
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-5. Collect static files:
-
-```
+5️⃣ **Collect static files:**  
+```sh
 python manage.py collectstatic
 ```
 
-6. Create a superuser:
-
-```
+6️⃣ **Create a superuser (for admin access):**  
+```sh
 python manage.py createsuperuser
 ```
 
-7. Run the development server:
-
-```
+7️⃣ **Run the development server:**  
+```sh
 python manage.py runserver
 ```
 
-8. Open the server link:
+8️⃣ **Access the application:**  
+Open your browser and go to:  
+👉 `http://127.0.0.1:8000`  
 
+---
+
+## 🐋 Docker Setup  
+
+### **Prerequisites**  
+Make sure you have:  
+- Docker  
+- Docker Compose  
+- Git  
+
+### **Steps**  
+
+1️⃣ **Clone the repository:**  
+```sh
+git clone https://github.com/emoncse/CoolEscape.git
 ```
-https://127.0.0.1:8000
-```
 
-
-## Docker Installation
-
-### Prerequisites
-1. Docker
-2. Docker Compose
-3. Git
-
-### Steps
-1. Clone the repository:
-```sh 
-git clone `https://github.com/emoncse/CoolEscape.git`
-````
-
-2. Change directory to the project folder:
+2️⃣ **Navigate to the project directory:**  
 ```sh
 cd CoolEscape
 ```
 
-3. Build the Docker image and Run the Docker container:
+3️⃣ **Build and run the Docker container:**  
 ```sh
 docker compose up --build
 ```
 
-4. Run the Docker container in the background:
+4️⃣ **Run in detached mode (background):**  
 ```sh
 docker compose up -d
 ```
 
+---
 
-## Setup
+## 🔌 API Endpoints  
 
-## API Endpoints
+### **Authentication**  
+- 🔑 **Obtain Token:** `POST /api/token/`  
+- 🔄 **Refresh Token:** `POST /api/token/refresh/`  
 
-### Authentication
+### **Coolest Districts API**  
+- ❄️ **Get the coolest districts:** `GET /v1/coolest-districts/`  
 
-- Obtain Token: `POST /api/token/`
-- Refresh Token: `POST /api/token/refresh/`
+### **Travel Advice API**  
+- ✈️ **Get travel advice:** `GET /v1/travel-destination/`  
 
-### Coolest Districts API
+---
 
-- Get the coolest districts: `GET /v1/coolest-districts/`
+## 📚 Swagger API Documentation  
 
-### Travel Advice API
+CoolEscape provides an interactive API documentation powered by **Swagger**.  
 
-- Get Travel Advice: `GET /v1/travel-destination/`
+📌 **Swagger URL:**  
+👉 `http://127.0.0.1:8000/api/docs/`  
 
-[//]: # (### User Management API)
+### **API Examples**  
 
-[//]: # (- Get All Users: `GET /API/users/`)
+📌 **Obtain Token:**  
+```http
+POST /api/token/
+```
+**Body:**  
+```json
+{
+    "username": "your_username",
+    "password": "your_password"
+}
+```
 
-[//]: # (- Create User: `POST /API/users/`)
+📌 **Access Protected Endpoints:**  
+```http
+GET /v1/coolest-districts/
+```
+**Headers:**  
+```text
+Authorization: Bearer <your_access_token>
+```
 
-[//]: # (- Get User by Username: `GET /API/users/{username}/`)
+📌 **Refresh Token:**  
+```http
+POST /api/token/refresh/
+```
+**Body:**  
+```json
+{
+    "refresh": "<your_refresh_token>"
+}
+```
 
-[//]: # (- Update User by Username: `PUT /API/users/{username}/`)
+---
 
-[//]: # (      - must send authorization token in request body)
+## 🛠 Using Postman  
 
-[//]: # (- Partially Update User by Username: `PATCH /API/users/{username}/`)
+1️⃣ **Obtain Token**  
+- **URL:** `http://127.0.0.1:8000/api/token/`  
+- **Method:** `POST`  
+- **Body:**  
+  ```json
+  {
+      "username": "your_username",
+      "password": "your_password"
+  }
+  ```
 
-[//]: # (      - must send authorization token in request body)
+2️⃣ **Access Protected Endpoints**  
+- **URL:** `http://127.0.0.1:8000/v1/*/`  
+- **Method:** `GET`  
+- **Headers:**  
+  ```
+  Authorization: Bearer <access_token>
+  ```
 
-[//]: # (- Delete User by Username: `DELETE /API/users/{username}/`)
+3️⃣ **Refresh Token**  
+- **URL:** `http://127.0.0.1:8000/api/token/refresh/`  
+- **Method:** `POST`  
+- **Body:**  
+  ```json
+  {
+      "refresh": "<refresh_token>"
+  }
+  ```
 
-[//]: # (        - must send authorization token in request body)
+---
 
-[//]: # (- Get All Log: `GET /API/logs/`)
+### Special Note: aiohttp library the Game Changer
 
-[//]: # (- Get Log by id: `GET /API/logs/{id}`)
+**Why Use aiohttp?**
 
-## Swagger API Documentation
+* The aiohttp library is an asynchronous HTTP client/server framework that enables non-blocking network operations. It is particularly useful when handling multiple API calls concurrently.
 
-- CoolEscape API Documentation
-- Version: 1.0.0
-- OAS: 3.0
+#### Benefits of aiohttp:
 
-### Swagger URL
+* Asynchronous Networking – Allows non-blocking HTTP requests, making API interactions faster.
 
-- **Swagger**: `http://127.0.0.1:8000/api/docs/`
-- **Cool Escape API Documentation**
+* Performance Boost – Handles multiple API requests simultaneously, reducing wait times.
 
-[//]: # (### User Management)
+* Streaming Support – Efficient for large data transfers.
 
-[//]: # ()
-[//]: # (- **GET** `/API/users/`)
+* Built-in Connection Pooling – Reuses existing connections to optimize performance.
 
-[//]: # (- **POST** `/API/users/`)
 
-[//]: # (- **GET** `/API/users/{username}/`)
 
-[//]: # (- **PUT** `/API/users/{username}/`)
+---
+## ⚠️ Note  
 
-[//]: # (- **PATCH** `/API/users/{username}/`)
+🚀 **The API is currently open for public use.** However, we can restrict access by enabling the `IsAuthenticated` permission class. The necessary code is already included but commented out in the project.  
 
-[//]: # (- **DELETE** `/API/users/{username}/`)
+---
 
-### API
-
-- **POST** `/api/token/`
-- **POST** `/api/token/refresh/`
-- **GET** `/v1/coolest-districts/`
-  - **Parameters**:
-    - `limit` (integer): The number of coolest districts to be returned.
-    - `sort` (string): The field by which the coolest districts
-
-- **GET** `/v1/travel-destination/`
-  - **Parameters**:
-    - `date` (string): The date for which the travel advice is to be found.
-    - `friend_district` (string): The first location for which the weather is to be compared.
-    - `destination_district` (string): The second location for which the weather is to be compared.
-
-## Using Postman
-
-### Obtain Token
-
-1. **URL**: `http://127.0.0.1:8000/api/token/`
-2. **Method**: `POST`
-3. **Body**: 
-   ```
-   {
-       "username": "your_username",
-       "password": "your_password"
-   }
-   ```
-
-### Access Protected Endpoints
-
-1. **URL**: `http://127.0.0.1:8000/v1/*/`
-2. **Method**: `GET`
-3. **Headers**:
-   - Key: `Authorization`
-   - Value: `Bearer <access_token>`
-
-Replace `<access_token>` with the token obtained in the previous step.
-
-### Refresh Token
-
-1. **URL**: `http://127.0.0.1:8000/api/token/refresh/`
-2. **Method**: `POST`
-3. **Body**:
-   ```
-   {
-       "refresh": "<refresh_token>"
-   }
-   ```
-
-## N.B. The API are open for public use. You can use the API without any authentication. We can also restrict the API access by using isAuthenticated permission classes.
