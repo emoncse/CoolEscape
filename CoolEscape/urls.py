@@ -33,7 +33,7 @@ authentication_urlspatterns = [
 ]
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
+    path('admin/', admin.site.urls),
     path('', landing, name='landing'),
     path('v1/', include([
         path('', include('coolest_districts.urls.urls_v1')),

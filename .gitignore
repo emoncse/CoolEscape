@@ -9,7 +9,7 @@ venv/
 
 # database
 db.sqlite3
-
+static_root/
 
 # Environment variables file
 .env

@@ -1,5 +1,7 @@
-[Modified] CoolEscape: [CES012]
+[Modified] CoolEscape: [CES013]
 
-1. Slightly modified in the readme file.
+1. Slightly modified in the setting file for static files.
+2. Modified admin url in the template.
+4. Added collect static in the dockerfile.
 
-CES0012
+CES0013
