@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
+from common_services.index_render import landing
 swagger_urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
@@ -33,7 +33,8 @@ authentication_urlspatterns = [
 ]
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
+    path('', landing, name='landing'),
     path('v1/', include([
         path('', include('coolest_districts.urls.urls_v1')),
         path('', include('travel_advice.urls.urls_v1')),
