@@ -10,6 +10,7 @@ class TravelRecommendationLogicTest(TestCase):
             "friend_temperature": 27.5,
             "destination_temperature": 26.8,
             "decision": "Yes, it's a good day to travel!"
+
         }
 
         result = await WeatherService.compare_travel_weather("Dhaka", "Chattogram","2024-02-10")
