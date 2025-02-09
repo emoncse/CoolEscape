@@ -1,5 +1,5 @@
-[Added] CoolEscape: [CES011]
+[Modified] CoolEscape: [CES012]
 
-1. landing page added for smooth onboarding and navigation to swagger documentation, redoc documentation, Schema and admin panel.
+1. Slightly modified in the readme file.
 
-CES0010
+CES0012
